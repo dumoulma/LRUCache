@@ -7,17 +7,13 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include "ICurl.h"
 #include <string>
-#include <ostream>
-
 #include "LRUCache.h"
+#include "ICurl.h"
 
 using std::string;
 using namespace testing;
 using ::testing::Return;
-using std::cout;
-using std::endl;
 
 class ICurlMock: public ICurl
 {
