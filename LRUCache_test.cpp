@@ -140,6 +140,42 @@ TEST_F(LRUCacheTest, addElementToFullCacheMakesSpaceOK2)
 	EXPECT_EQ(expected2.size() + expected3.size(), cache.size());
 }
 
+TEST_F(LRUCacheTest, givenACacheWith2elementsGettingTheOlderElementWillRefreshItsAge)
+{
+	string url1 = "www.gel-gif.ulaval.ca";
+	string expected1(55, '1');
+	string url2 = "www.ift.ulaval.ca";
+	string expected2(40, '2');
+	string url3 = "www.monblog.ca";
+	string expected3(20, '3');
+
+	EXPECT_CALL(mock, getFrom(url1)).Times(1).WillOnce(Return(expected1));
+	EXPECT_CALL(mock, getFrom(url2)).Times(1).WillOnce(Return(expected2));
+	EXPECT_CALL(mock, getFrom(url3)).Times(1).WillOnce(Return(expected3));
+
+	cache.getDocument(url1);
+	cache.getDocument(url2);
+	cache.getDocument(url1);
+	string actual3 = cache.getDocument(url3);
+
+	EXPECT_EQ(2, cache.getValueCount());
+	EXPECT_EQ(expected1.size() + expected3.size(), cache.size());
+}
+
+TEST_F(LRUCacheTest, gettingADocumentBiggerThanTheCacheDoesntAddIt)
+{
+	string url1 = "www.gel-gif.ulaval.ca";
+	string expected1(101, '1');
+
+	EXPECT_CALL(mock, getFrom(url1)).Times(1).WillOnce(Return(expected1));
+
+	string actual = cache.getDocument(url1);
+
+	EXPECT_EQ(expected1, actual);
+	EXPECT_EQ(0, cache.getValueCount());
+	EXPECT_EQ(0, cache.size());
+}
+
 int main(int argc, char** argv)
 {
 	// The following line must be executed to initialize Google Mock

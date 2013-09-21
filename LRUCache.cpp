@@ -24,7 +24,7 @@ string LRUCache::getDocument(const string &url)
 	if (cache_.find(url) != cache_.end())
 	{
 		history_.remove(url);
-		history_.push_back(url);
+		history_.push_front(url);
 		return cache_[url];
 	}
 	// else
@@ -42,7 +42,7 @@ string LRUCache::addToCache(const string &url)
 	{
 		makeSpace(document.size());
 	}
-	history_.push_back(url);
+	history_.push_front(url);
 	cache_[url] = document;
 	current_size_ += document.size();
 
@@ -54,8 +54,8 @@ void LRUCache::makeSpace(unsigned int neededSpace)
 
 	while (max_capacity_ - current_size_ < neededSpace and !cache_.empty())
 	{
-		string url = history_.front();
-		history_.pop_front();
+		string url = history_.back();
+		history_.pop_back();
 		string document = cache_[url];
 		cache_.erase(url);
 		current_size_ -= document.size();
