@@ -8,7 +8,7 @@
 #ifndef ICURL_H_
 #define ICURL_H_
 
-#include <string>
+using std::string;
 
 class ICurl
 {
