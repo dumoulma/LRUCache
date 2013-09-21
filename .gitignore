@@ -1,5 +1,6 @@
 # Eclipse
 .classpath
 .cproject
+.project
 .settings/
 /Debug
