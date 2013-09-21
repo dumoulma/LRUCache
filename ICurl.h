@@ -7,6 +7,7 @@
 
 #ifndef ICURL_H_
 #define ICURL_H_
+
 #include <string>
 
 class ICurl
