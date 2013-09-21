@@ -1,6 +1,22 @@
+<<<<<<< HEAD
 # Eclipse
 .classpath
 .cproject
 .project
 .settings/
 /Debug
+=======
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+>>>>>>> 9d1924254415b19ebc944bdbc2aa30737e24835e
