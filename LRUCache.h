@@ -18,20 +18,20 @@ class ICurl;
 class LRUCache
 {
 public:
-	LRUCache(ICurl & curl, unsigned int max_capacity = 2000);
+	LRUCache(ICurl & curl, std::size_t max_capacity);
 	virtual ~LRUCache();
 	string getDocument(const string &key);
-	int size() const;
-	int getValueCount() const;
+	std::size_t size() const;
+	std::size_t getValueCount() const;
 
 private:
-	void makeSpace(unsigned int neededSpace);
+	void makeSpace(std::size_t neededSpace);
 	string addToCache(const string &url);
 
 	std::list<string> history_;
 	std::map<string, string> cache_;
-	unsigned int max_capacity_;
-	unsigned int current_size_;
+	std::size_t max_capacity_;
+	std::size_t current_size_;
 
 	ICurl & curl_;
 };
