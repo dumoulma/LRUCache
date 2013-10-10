@@ -21,22 +21,20 @@ public:
 	MOCK_CONST_METHOD1(getFrom, string(const string &url));
 };
 
-class LRUCacheTest: public Test
+struct LRUCacheTest: public Test
 {
-public:
 	LRUCacheTest() :
 			cache(mock, 100)
 	{
 	}
 
-protected:
 	ICurlMock mock;
 	LRUCache cache;
 };
 
 TEST_F(LRUCacheTest, newCacheHasSizeZero)
 {
-	EXPECT_EQ(0, cache.size());
+	EXPECT_EQ((size_t) 0, cache.size());
 }
 
 TEST_F(LRUCacheTest, addAnewItemToCacheFetchesURLWithCurlAndAddsToCache)
@@ -48,7 +46,7 @@ TEST_F(LRUCacheTest, addAnewItemToCacheFetchesURLWithCurlAndAddsToCache)
 
 	string actual = cache.getDocument(url);
 
-	EXPECT_EQ(1, cache.getValueCount());
+	EXPECT_EQ((size_t) 1, cache.getValueCount());
 	EXPECT_EQ(expected.size(), cache.size());
 	EXPECT_EQ(expected, actual);
 }
@@ -63,7 +61,7 @@ TEST_F(LRUCacheTest, getDocumentSecondTimeShouldHitTheCache)
 	cache.getDocument(url);
 	string actual = cache.getDocument(url);
 
-	EXPECT_EQ(1, cache.getValueCount());
+	EXPECT_EQ((size_t) 1, cache.getValueCount());
 	EXPECT_EQ(expected, actual);
 	EXPECT_EQ(expected.size(), cache.size());
 }
