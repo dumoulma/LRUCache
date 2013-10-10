@@ -8,7 +8,10 @@
 #include "LRUCache.h"
 #include "ICurl.h"
 
-LRUCache::LRUCache(ICurl & curl, std::size_t max_capacity) :
+using std::size_t;
+using std::string;
+
+LRUCache::LRUCache(ICurl & curl, size_t max_capacity) :
 		max_capacity_(max_capacity), current_size_(0), curl_(curl)
 {
 
@@ -40,7 +43,7 @@ void LRUCache::addToCache(const string &url, const string &document)
 	current_size_ += document.size();
 }
 
-void LRUCache::makeSpace(std::size_t neededSpace)
+void LRUCache::makeSpace(size_t neededSpace)
 {
 
 	while (max_capacity_ - current_size_ < neededSpace and !cache_.empty())
@@ -53,11 +56,11 @@ void LRUCache::makeSpace(std::size_t neededSpace)
 	}
 }
 
-std::size_t LRUCache::getValueCount() const
+size_t LRUCache::getValueCount() const
 {
 	return cache_.size();
 }
-std::size_t LRUCache::size() const
+size_t LRUCache::size() const
 {
 	return current_size_;
 }

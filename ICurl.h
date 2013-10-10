@@ -8,8 +8,6 @@
 #ifndef ICURL_H_
 #define ICURL_H_
 
-using std::string;
-
 class ICurl
 {
 public:
