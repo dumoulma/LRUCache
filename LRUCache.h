@@ -26,8 +26,8 @@ private:
 	void makeSpace(std::size_t neededSpace);
 	void addToCache(const std::string &url, const std::string &document);
 
-	std::list<string> history_;
-	std::map<string, string> cache_;
+	std::list<std::string> history_;
+	std::map<std::string, std::string> cache_;
 	std::size_t max_capacity_;
 	std::size_t current_size_;
 

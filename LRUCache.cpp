@@ -24,14 +24,13 @@ string LRUCache::getDocument(const string &url)
 	}
 	// else
 	string document = curl_.getFrom(url);
-	return addToCache(url, document);
+	if (document.size() < max_capacity_)
+		addToCache(url, document);
+	return document;
 }
 
 void LRUCache::addToCache(const string &url, const string &document)
 {
-	if (document.size() > max_capacity_)
-		return document;
-
 	if (current_size_ + document.size() > max_capacity_)
 	{
 		makeSpace(document.size());
@@ -39,8 +38,6 @@ void LRUCache::addToCache(const string &url, const string &document)
 	history_.push_front(url);
 	cache_[url] = document;
 	current_size_ += document.size();
-
-	return document;
 }
 
 void LRUCache::makeSpace(std::size_t neededSpace)
