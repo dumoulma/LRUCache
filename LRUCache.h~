@@ -17,7 +17,7 @@ class ICurl;
 class LRUCache {
 public:
 	LRUCache(ICurl & curl, std::size_t max_capacity);
-
+	virtual ~LRUCache();
 	std::string getDocument(const std::string &key);
 	std::size_t size() const;
 	std::size_t getValueCount() const;

@@ -14,6 +14,11 @@ LRUCache::LRUCache(ICurl & curl, std::size_t max_capacity) :
 
 }
 
+LRUCache::~LRUCache()
+{
+
+}
+
 string LRUCache::getDocument(const string &url)
 {
 	if (cache_.find(url) != cache_.end())
